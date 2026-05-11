@@ -1,133 +1,268 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Daily Personal Dashboard</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Dashboard</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f7fb;
-      color: #222;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    header {
-      background: linear-gradient(135deg, #4f8cff, #7b61ff);
-      color: white;
-      padding: 40px 20px;
-      text-align: center;
-    }
+<style>
 
-    header h1 {
-      margin: 0;
-      font-size: 32px;
-    }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
 
-    header p {
-      margin-top: 10px;
-      font-size: 16px;
-    }
+body{
+    background:linear-gradient(135deg,#081028,#151b4b);
+    min-height:100vh;
+    color:white;
+    padding:40px;
+}
 
-    .container {
-      max-width: 1000px;
-      margin: 30px auto;
-      padding: 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-    }
+.container{
+    max-width:1200px;
+    margin:auto;
+}
 
-    .card {
-      background: white;
-      border-radius: 18px;
-      padding: 25px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      transition: 0.3s;
-    }
+.top{
+    text-align:center;
+    margin-bottom:50px;
+}
 
-    .card:hover {
-      transform: translateY(-5px);
-    }
+.clock{
+    font-size:70px;
+    font-weight:700;
+    margin-bottom:10px;
+}
 
-    .card h2 {
-      margin-top: 0;
-      color: #4f6cff;
-      font-size: 22px;
-    }
+.greeting{
+    color:#cfd3ff;
+    font-size:20px;
+    margin-bottom:35px;
+}
 
-    .card p {
-      font-size: 14px;
-      color: #555;
-    }
+.search-box{
+    width:100%;
+    max-width:600px;
+    margin:auto;
+    background:rgba(255,255,255,0.08);
+    border-radius:20px;
+    padding:15px 20px;
+    display:flex;
+    align-items:center;
+    backdrop-filter:blur(10px);
+}
 
-    .card a {
-      display: block;
-      margin-top: 10px;
-      text-decoration: none;
-      color: white;
-      background: #4f6cff;
-      padding: 10px;
-      border-radius: 10px;
-      text-align: center;
-    }
+.search-box input{
+    width:100%;
+    background:none;
+    border:none;
+    outline:none;
+    color:white;
+    font-size:16px;
+}
 
-    .card a:hover {
-      background: #354bd8;
-    }
+.search-buttons{
+    margin-top:20px;
+    display:flex;
+    justify-content:center;
+    gap:15px;
+}
 
-    footer {
-      text-align: center;
-      padding: 20px;
-      color: #777;
-      font-size: 14px;
-    }
-  </style>
+.search-buttons button{
+    padding:10px 20px;
+    border:none;
+    border-radius:20px;
+    background:rgba(255,255,255,0.08);
+    color:white;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.search-buttons button:hover{
+    background:#6c63ff;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
+
+.card{
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:25px;
+    padding:25px;
+    backdrop-filter:blur(15px);
+    box-shadow:0 8px 20px rgba(0,0,0,0.3);
+}
+
+.card h2{
+    margin-bottom:20px;
+    font-size:24px;
+}
+
+.link-box{
+    background:rgba(255,255,255,0.06);
+    padding:15px;
+    border-radius:15px;
+    margin-bottom:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    transition:0.3s;
+}
+
+.link-box:hover{
+    background:rgba(255,255,255,0.12);
+    transform:translateX(5px);
+}
+
+.link-box a{
+    color:white;
+    text-decoration:none;
+    font-size:16px;
+}
+
+.icon{
+    font-size:20px;
+}
+
+</style>
 </head>
 
 <body>
-  <header>
-    <h1>Daily Personal Dashboard</h1>
-    <p>뉴스, 이메일, 연구자료, 엔터테인먼트를 한 곳에서 확인하세요.</p>
-  </header>
 
-  <main class="container">
-    <div class="card">
-      <h2>📰 News</h2>
-      <p>매일 확인할 뉴스 사이트입니다.</p>
-      <a href="https://news.google.com" target="_blank">Google News</a>
-      <a href="https://www.bbc.com/news" target="_blank">BBC News</a>
+<div class="container">
+
+    <div class="top">
+        <div class="clock" id="clock">00:00:00</div>
+
+        <div class="greeting">
+            Good Evening, Developer.
+        </div>
+
+        <div class="search-box">
+            <input type="text" placeholder="Google에서 검색...">
+        </div>
+
+        <div class="search-buttons">
+            <button onclick="window.open('https://google.com')">
+                Google
+            </button>
+
+            <button onclick="window.open('https://naver.com')">
+                Naver
+            </button>
+        </div>
     </div>
 
-    <div class="card">
-      <h2>📧 Email</h2>
-      <p>이메일을 빠르게 확인할 수 있습니다.</p>
-      <a href="https://mail.google.com" target="_blank">Gmail</a>
-      <a href="https://outlook.live.com" target="_blank">Outlook</a>
+    <div class="grid">
+
+        <div class="card">
+            <h2>✅ Daily Routine</h2>
+
+            <div class="link-box">
+                <a href="https://mail.google.com" target="_blank">
+                    Gmail
+                </a>
+                <span class="icon">↗</span>
+            </div>
+
+            <div class="link-box">
+                <a href="https://mail.naver.com" target="_blank">
+                    Naver Mail
+                </a>
+                <span class="icon">↗</span>
+            </div>
+
+            <div class="link-box">
+                <a href="https://calendar.google.com" target="_blank">
+                    Google Calendar
+                </a>
+                <span class="icon">↗</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>📚 Research & Academic</h2>
+
+            <div class="link-box">
+                <a href="https://arxiv.org" target="_blank">
+                    arXiv
+                </a>
+                <span class="icon">↗</span>
+            </div>
+
+            <div class="link-box">
+                <a href="https://scholar.google.com" target="_blank">
+                    Google Scholar
+                </a>
+                <span class="icon">↗</span>
+            </div>
+
+            <div class="link-box">
+                <a href="https://researchgate.net" target="_blank">
+                    ResearchGate
+                </a>
+                <span class="icon">↗</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🎬 Entertainment</h2>
+
+            <div class="link-box">
+                <a href="https://netflix.com" target="_blank">
+                    Netflix
+                </a>
+                <span class="icon">↗</span>
+            </div>
+
+            <div class="link-box">
+                <a href="https://youtube.com" target="_blank">
+                    YouTube
+                </a>
+                <span class="icon">↗</span>
+            </div>
+
+            <div class="link-box">
+                <a href="https://coupang.com" target="_blank">
+                    Coupang
+                </a>
+                <span class="icon">↗</span>
+            </div>
+
+        </div>
+
     </div>
 
-    <div class="card">
-      <h2>📚 Research</h2>
-      <p>과제와 공부에 필요한 연구자료를 찾을 수 있습니다.</p>
-      <a href="https://scholar.google.com" target="_blank">Google Scholar</a>
-      <a href="https://www.researchgate.net" target="_blank">ResearchGate</a>
-    </div>
+</div>
 
-    <div class="card">
-      <h2>🎬 Entertainment</h2>
-      <p>휴식 시간에 사용할 엔터테인먼트 사이트입니다.</p>
-      <a href="https://www.youtube.com" target="_blank">YouTube</a>
-      <a href="https://www.netflix.com" target="_blank">Netflix</a>
-    </div>
-  </main>
+<script>
 
-  <footer>
-    © 2026 My Daily Personal Dashboard
-  </footer>
+function updateClock(){
 
-  <script>
-    console.log("Daily Personal Dashboard is ready!");
-  </script>
+    const now = new Date();
+
+    let hours = String(now.getHours()).padStart(2,'0');
+    let minutes = String(now.getMinutes()).padStart(2,'0');
+    let seconds = String(now.getSeconds()).padStart(2,'0');
+
+    document.getElementById('clock').innerHTML =
+        `${hours}:${minutes}:${seconds}`;
+}
+
+setInterval(updateClock,1000);
+
+updateClock();
+
+</script>
+
 </body>
 </html>
